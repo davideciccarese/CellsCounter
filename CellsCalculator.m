@@ -39,10 +39,14 @@ lambda % Parameter for the Poisson distribution
 % empty droplets, 22% droplets with 1 cell, 3.3% droplets with 2 cells and
 % 0.3% droplets with 3 cells.
 
-k = 0:10;     % Values at which to evaluate the distribution
+k = 0:10;     % Values at which to evaluate the distribution number of cells in a droplet
 
 % Calculate the probability mass function (PMF) for the Poisson distribution
 pmf = poisspdf(k, lambda);
+
+% Visualize the distribution
+bar(k,Percent,1);
+saveas(gcf,'Distribution.png')
 
 % Display the results
 % disp('Poisson PMF:');
