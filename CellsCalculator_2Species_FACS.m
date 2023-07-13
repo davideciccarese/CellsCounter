@@ -19,7 +19,7 @@
 
 clear all
 close all
-cd '/Users/davide.ciccarese/Desktop/'
+cd '/PATH/'
 
 
 %% FIRST STEP parameters
