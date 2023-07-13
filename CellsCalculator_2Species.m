@@ -4,7 +4,7 @@
 % Last Modification: 12/07/2023
 
 % The code calculates the required dilution factor for a given cell
-% density, based on parameters such as the average number of cells per
+% density of two species, based on parameters such as the average number of cells per
 % droplet and the measured optical density. It also calculates the
 % probability of having a certain number of cells in a droplet using a
 % Poisson distribution. The code, is based on the assumption of a typical
@@ -20,7 +20,7 @@
 
 clear all
 close all
-cd '/Users/davide.ciccarese/Desktop/'
+cd '/PATH/'
 
 %% parameters
 
