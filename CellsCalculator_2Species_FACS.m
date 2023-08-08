@@ -1,14 +1,15 @@
 %% Davide Ciccarese
 
 % Date of creatinon: 12/07/2023
-% Last Modification: 13/07/2023
+% Last Modification: 08/08/2023
 
-% The code calculates the necessary dilution factor for a given cell
-% density, which is measured using FACS (Fluorescence-Activated Cell
-% Sorting), for a mixture of two species. It also calculates the
-% probability of having a certain number of cells in a droplet based on a
-% Poisson distribution.
-
+% The code calculates the required dilution factor for a given cell
+% density, based on parameters such as the average number of cells per
+% droplet and the measured optical density. It also calculates the
+% probability of having a certain number of cells in a droplet using a
+% Poisson distribution. The code, is based on the assumption of a typical
+% OD of E.coli. This can be changed using FACS
+% 
 % ---Reference---
 % The code is basd on this paper
 % Duarte JM, Barbier I, Schaerli Y. (2017) Bacterial Microcolonies in Gel Beads
@@ -19,18 +20,18 @@
 
 clear all
 close all
-cd '/PATH/'
+cd 'C:\Users\Van der Meer group\Desktop\'
 
 
 %% FIRST STEP parameters
 
 %Parametrization following Shaerly protocol
-lambda = 3; % IMPORTANT LAMBDA IS THE AVARAGE number of cells/droplet; Shaerly used 0.3 
+lambda = 2; % IMPORTANT LAMBDA IS THE AVARAGE number of cells/droplet; Schaerli used 0.3 
 r = 20*10^-6; %25*10^-6 Um, radius of Beads
 
 %FACS cells in 1 ml
-ODe1 = 2.5*10^7; %NatCom
-ODe2 = 5*10^6; %Fluorecence species
+ODe1 = 3*10^8; %NatCom
+ODe2 = 2*10^9; %Fluorecence species
 
 
 %%
@@ -47,8 +48,8 @@ Sel1 = Sel1(Sel1>0);
 Sel2 = (vecT.*([vecT==(max(vecT))]));
 Sel2 = Sel2(Sel2>0);
 
-Dilution = round((Sel1/Sel2)*1000);
-Dilution2 = 1000-Dilution;
+Dilution = round((Sel1/Sel2)*2000);
+Dilution2 = 2000-Dilution;
 
 % Poisson distribution
 
@@ -89,7 +90,7 @@ T = table(Percent', numbCells', 'VariableNames',  {'Percentage', 'Number_of_cell
 % Write data to text file
 writetable(T, 'Cells_number_distribution.txt','Delimiter', '\t');
 
-X = cell2mat([((varMix(([vecT==(min(vecT))])))),'',num2str(Dilution),' ul in ',num2str(Dilution2),' ul of PBS'])
+X = cell2mat([((varMix(([vecT==(max(vecT))])))),'',num2str(Dilution),' ul in ',num2str(Dilution2),' ul of PBS'])
 
 % varMs = {'SymCom', 'Fluo'};
 % %varM = [(varMs(([vecT==(min(vecT))]))), 'and'  (varMs(([vecT==(max(vecT))]))), '1:1']
@@ -116,7 +117,11 @@ fclose(fileID);
 
 %================================
 % FACS after mixing 1:1
-mOD = 5*10^8;
+lambda = 2; % IMPORTANT LAMBDA IS THE AVARAGE number of cells/droplet; Schaerli used 0.3 
+r = 20*10^-6; %25*10^-6 Um, radius of Beads
+agarosePerc = 2;
+mOD = 2*10^8;
+FinalVol = 3000;
 %%
 
 
@@ -138,16 +143,16 @@ cOD = TotNCells/(mOD); %Dilution factor
 % (mOD/cOD)
 % foldDilution = round(,3);
 foldDilution = cOD;
-Dilution3 = round(1000*foldDilution);
+Dilution3 = round(FinalVol*foldDilution);
 
 
-DivFactAg = 1/2; %dilution factor of 2% agarose vs 1% agarose
-AgC = round(1000-(DivFactAg*1000));
+DivFactAg = 1/agarosePerc; %dilution factor of 2% agarose vs 1% agarose
+AgC = round((DivFactAg*FinalVol));
 
-pbsAgar = AgC-Dilution3;
+pbsAgar = FinalVol-(AgC+Dilution3);
 
 % Dilution4 = 1000-Dilution3;
 
-finalMessage = ['Dilute your 1:1 mix ', num2str(Dilution3), ' ul in ', num2str(AgC), ' of 2% Agarose', ' then add ',num2str(pbsAgar),' of PBS' ]
+finalMessage = ['Dilute your 1:1 mix ', num2str(Dilution3), ' ul in ', num2str(AgC), 'uL of ',num2str(agarosePerc), '% Agarose', ' then add ',num2str(pbsAgar),'uL of PBS', ' For a final volume of ',num2str(FinalVol)]
 
 
