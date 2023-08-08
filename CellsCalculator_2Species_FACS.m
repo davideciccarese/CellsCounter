@@ -20,18 +20,18 @@
 
 clear all
 close all
-cd 'C:\Users\Van der Meer group\Desktop\'
+cd '/YourPath/'
 
 
 %% FIRST STEP parameters
 
 %Parametrization following Shaerly protocol
 lambda = 2; % IMPORTANT LAMBDA IS THE AVARAGE number of cells/droplet; Schaerli used 0.3 
-r = 20*10^-6; %25*10^-6 Um, radius of Beads
+r = 20*10^-6; % Um, radius of Beads
 
 %FACS cells in 1 ml
-ODe1 = 3*10^8; %NatCom
-ODe2 = 2*10^9; %Fluorecence species
+ODe1 = xxx; %NatCom
+ODe2 = xxx; %Fluorecence species
 
 
 %%
@@ -120,7 +120,7 @@ fclose(fileID);
 lambda = 2; % IMPORTANT LAMBDA IS THE AVARAGE number of cells/droplet; Schaerli used 0.3 
 r = 20*10^-6; %25*10^-6 Um, radius of Beads
 agarosePerc = 2;
-mOD = 2*10^8;
+mOD = xxx;
 FinalVol = 3000;
 %%
 
