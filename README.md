@@ -1,4 +1,4 @@
-# Estimation of cells distribution for microfluidic droplets
+# Estimation of cells distribution in microfluidic droplets
 
 'CellsCalculator' The code estimate the Poisson distribution of cell numbers in droplets, based on the initial optical density. This estimation assumes a typical optical density at 600 nm corresponding to a specific number of E. coli cells per ml.
 
