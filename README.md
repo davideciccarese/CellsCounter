@@ -1,10 +1,10 @@
 # CellsCounter for microfluidic droplet preparation
 
-'CellsCalculator' the script calculates the probability of having a number of cells in a droplet based on the Poisson distribution. The code, is based on the assumption of a typical number of cells of E.coli per ml. But can be more accurate for other species using direct FACS quantification.
+'CellsCalculator' The code estimate the Poisson distribution of cell numbers in droplets, based on the initial optical density. This estimation assumes a typical optical density at 600 nm corresponding to a specific number of E. coli cells per ml.
 
-'CellsCalculator_2Species_FACS' code calculates the necessary dilution factor for a given cell density, which is measured using FACS, for a mixture of two species. It then calculates the probability of having a certain number of cells in a droplet based on the Poisson distribution.
+'CellsCalculator_2Species_FACS' The code estimates the Poisson distribution of cell numbers in droplets, consisting of a mixture of two species, using FACS quantification.
 
-'CellsCalculator_2Species' code calculates the necessary dilution factor for a given cell density, which is measured using optical density (OD 600), for a mixture of two species. It then calculates the probability of having a certain number of cells in a droplet based on the Poisson distribution. 
+'CellsCalculator_2Species' The code estimates the Poisson distribution of cell numbers in droplets, consisting of a mixture of two species, using the optical density (OD 600).
 
 ---Reference---
 These codes are basd on this paper
